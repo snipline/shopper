@@ -1,0 +1,16 @@
+{{#if editing}}
+    <div class="flex">
+        {{input value=item.name insert-newline="save" class="item-editor flex-grow"}}
+        <button {{ action "delete" }} class="ml-2 text-white bg-red-light rounded-full p-1"><clr-icon shape="trash"></clr-icon></button>
+        <button {{ action "save" }} class="ml-2 bg-green-light text-white rounded-full p-1"><clr-icon shape="floppy"></clr-icon></button>
+        <button {{ action "cancel" }} class="ml-2 text-grey-dark rounded-full p-1"><clr-icon shape="times"></clr-icon></button>
+    </div>
+{{else}}
+    {{#if isHeading }}
+        <h2  class="text-lg relative select-none" data-order="{{item.order}}"><button {{ action "toggleEdit" }}>{{item.formattedName}}</button><button class="pin-y -m-2 pin-r absolute js-dragHandle"><clr-icon size="24" shape="drag-handle"></clr-icon></button></h2>
+    {{else}}
+        <button {{ action toggleTicked item }} class="select-none"><clr-icon size="{{if item.isTicked '24' '24'}}" shape="{{if item.isTicked 'check-circle' 'circle' }}"></clr-icon></button>
+        <button {{ action "toggleEdit" }} class="select-none"><span data-order="{{item.order}}" class="ml-2 align-text-top mt-px inline-block">{{{ item.formattedName}}}</span></button>
+        <button class="pin-y pin-r absolute js-dragHandle select-none"><clr-icon size="24" shape="drag-handle"></clr-icon></button>
+    {{/if}}
+{{/if}}

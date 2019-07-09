@@ -1,0 +1,22 @@
+<div class="main-list mb-16">
+    {{#sortable-objects enableSort=true sortableObjectList=model sortEndAction=(action 'sortEndAction') sortingScope='a' }}
+        {{#each sortedItems as |item|}}
+            {{#draggable-object content=item overrideClass='sortObject' isSortable=true sortingScope='a' dragHandle='.js-dragHandle'}}
+                {{list-item item=item toggleTicked=(action "toggleTicked") active=active}}
+            {{/draggable-object}}
+        {{/each}}
+    {{/sortable-objects}}
+</div>
+{{#if isReading }}
+    <div class="fixed pin-r pin-b mr-4 mb-4">
+
+        <button {{ action "clearAll" }} alt="Clear all" class="rounded-full bg-grey-light text-grey-darkest p-2 mr-4 shadow-lg"><clr-icon shape="trash" size="20"></clr-icon></button>
+        <button {{ action "beginAdding" }} class="rounded-full bg-green-light shadow-lg text-white p-4"><clr-icon shape="plus" size="25"></clr-icon></button>
+    </div>
+{{else}}
+    <div class="fixed flex pin-l pin-r pin-b mx-4 mb-4 bg-white rounded p-2 shadow-lg">
+        {{input id="addInput" placeholder="Add new item..." insert-newline="save" value=newItem class="h-10 flex-grow"}}
+        <button {{ action "cancel" }} class="block flex-1 flex-no-grow w-10"><clr-icon size="24" shape="times"></clr-icon></button>
+        <button {{ action "save" }} class="ml-4 block flex-1 bg-red-light p-2 flex-no-grow rounded-full text-white text-bold text-sm w-10"><clr-icon shape="floppy" size="24"></clr-icon></button>
+    </div>
+{{/if}}
