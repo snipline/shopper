@@ -2,7 +2,7 @@ const path = require('path');
 const rootPath = path.join('./');
 
 function getCodesignIdentity() {
-  if (process.platform !== 'darwin') {
+  if (process.env.PLATFORM !== 'darwin') {
       return;
   }
 
@@ -15,7 +15,7 @@ function getCodesignIdentity() {
 }
 
 function getBundleId() {
-  if (process.platform !== 'darwin') {
+  if (process.env.PLATFORM !== 'darwin') {
       return;
   }
 
@@ -36,8 +36,7 @@ module.exports = {
       "zip"
     ],
     "linux": [
-      "deb",
-      "rpm"
+      "deb"
     ]
   },
   "electronPackagerConfig": {
@@ -59,7 +58,19 @@ module.exports = {
   "electronWinstallerConfig": {
     "name": "shopper"
   },
-  "electronInstallerDebian": {},
+  "electronInstallerDebian": {
+    "name": "shopper",
+    "productName": "Shopper",
+    "description": "A shopping list application",
+    "productDescription": "A shopping list application",
+    "icon": "electron-assets/shopper.png",
+    "bin": 'Shopper',
+    "desktopTemplate": path.join(rootPath, "ember-electron", "resources-linux", "desktop.ejs"),
+    "categories": [
+      "Utility"
+    ],
+    "homepage": "https://github.com/snipline/shopper"
+	},
   "electronInstallerRedhat": {},
   "github_repository": {
     "owner": "",
